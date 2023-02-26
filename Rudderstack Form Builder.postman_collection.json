@@ -1,0 +1,188 @@
+{
+	"info": {
+		"_postman_id": "44922aae-c33d-4666-9065-7ddaf129fbf0",
+		"name": "Rudderstack Form Builder",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2169029"
+	},
+	"item": [
+		{
+			"name": "CREATE source form template",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"    ",
+							"    var jsonData = pm.response.json();",
+							"    postman.setEnvironmentVariable(\"source_form_template_id\", jsonData[\"id\"]);",
+							"",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"{{source_type}} data form\",\n    \"type\": \"{{source_type}}\",\n    \"fields\": {\n        \"apiKey\": {\n            \"type\": \"input\",\n            \"label\": \"API key\",\n            \"regexErrorMessage\": \"Invalid api key\",\n            \"placeholder\": \"e.g: 1234asdf\",\n            \"regex\": \"[a-z0-9]\",\n            \"required\": true\n        },\n        \"useHTTP\": {\n            \"type\": \"checkbox\",\n            \"required\": false,\n            \"label\": \"Enable HTTP\"\n        },\n        \"category\": {\n            \"type\": \"singleSelect\",\n            \"label\": \"Select category\",\n            \"required\": true,\n            \"options\": [\n                {\n                    \"label\": \"Android\",\n                    \"value\": \"android\"\n                },\n                {\n                    \"label\": \"IOS\",\n                    \"value\": \"ios\"\n                }\n            ]\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{backend_server_url}}/source_data/source_forms",
+					"host": [
+						"{{backend_server_url}}"
+					],
+					"path": [
+						"source_data",
+						"source_forms"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET source form template",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{backend_server_url}}/source_data/source_forms/{{source_type}}",
+					"host": [
+						"{{backend_server_url}}"
+					],
+					"path": [
+						"source_data",
+						"source_forms",
+						"{{source_type}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE source",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"source_form_template\": {{source_form_template_id}},\n    \"company_id\": {{$randomInt}},\n    \"source_form_data\": {\n        \"apiKey\": \"123qewqre\",\n        \"useHTTP\": true,\n        \"category\": \"android\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{backend_server_url}}/source_data/sources",
+					"host": [
+						"{{backend_server_url}}"
+					],
+					"path": [
+						"source_data",
+						"sources"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET source",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{backend_server_url}}/source_data/sources/1",
+					"host": [
+						"{{backend_server_url}}"
+					],
+					"path": [
+						"source_data",
+						"sources",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE source",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{backend_server_url}}/source_data/sources/1",
+					"host": [
+						"{{backend_server_url}}"
+					],
+					"path": [
+						"source_data",
+						"sources",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET source types",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{backend_server_url}}/source_data/get_source_types",
+					"host": [
+						"{{backend_server_url}}"
+					],
+					"path": [
+						"source_data",
+						"get_source_types"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "backend_server_url",
+			"value": "http://localhost:8000",
+			"type": "string"
+		},
+		{
+			"key": "source_type",
+			"value": "FRESHDESK",
+			"type": "string"
+		}
+	]
+}
