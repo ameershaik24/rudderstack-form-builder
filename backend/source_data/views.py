@@ -6,9 +6,15 @@ from rest_framework.decorators import api_view
 
 @api_view(['GET'])
 def get_source_types(request):
-    source_types = dict(SourceFormTemplate.SourceType.choices)
+    # return only those source types for which form template is present
+    form_templates_source_types = SourceFormTemplate.objects.values_list("source_type", flat=True)
 
-    return JsonResponse(source_types)
+    response = {
+        source_type: getattr(SourceFormTemplate.SourceType, source_type).label
+        for source_type in form_templates_source_types
+    }
+
+    return JsonResponse(response)
 
 class SourceFormTemplateList(generics.CreateAPIView):
     serializer_class = SourceFormTemplateSerializer
