@@ -22,18 +22,18 @@ class SourceSerializer(serializers.ModelSerializer):
         source_form_template_fields = validated_data["source_form_template"].fields
 
         for field_name, field_details in source_form_template_fields.items():
-            if (not field_details["required"]) and (validated_data.get(field_name) is None):
+            if (not field_details["required"]) and (validated_data["source_form_data"].get(field_name) is None):
                 # nothing to validate, if a non required field is not provided
                 continue
 
-            if (field_details["required"]) and (validated_data.get(field_name) is None):
+            if (field_details["required"]) and (validated_data["source_form_data"].get(field_name) is None):
                 raise exceptions.ValidationError({
                     "error_msg": f"The required field '{field_name}' is not provided."
                 })
 
             # at this point, the field is present in the data
             # it could be a required field, or a not required field
-            field_value = validated_data.get(field_name)
+            field_value = validated_data["source_form_data"].get(field_name)
 
             # checks for input type
             if field_details["type"] == "input":
