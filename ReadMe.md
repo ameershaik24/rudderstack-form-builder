@@ -12,7 +12,6 @@
 
   python manage.py runserver
   ```
--
 
 ## Frontend
 - Written in Angular 8, using Bootstrap
@@ -23,4 +22,7 @@
 
   ng serve --open
   ```
+
+---
+A postman collection is included containing sample API examples.
 
