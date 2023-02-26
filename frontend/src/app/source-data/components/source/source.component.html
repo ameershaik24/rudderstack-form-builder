@@ -1,1 +1,44 @@
-<p>source works!</p>
+<select class="form-select" aria-label="Source Type select" (change)="getSourceFormTemplate($event.target.value)">
+    <option selected>Select source type</option>
+    <option *ngFor="let sourceType of sourceTypes | keyvalue" [value]="sourceType.key">{{sourceType.value}}</option>
+</select>
+
+<form *ngIf="sourceForm" #sourceDataForm="ngForm" (ngSubmit)="createSource(sourceDataForm)">
+    <div class="mb-3" *ngFor="let field of sourceForm.source_form.fields | keyvalue">
+
+        <!-- input element -->
+        <div *ngIf="field.value.type == 'input'">
+            <label [for]="field.key" class="form-label">{{field.value.label}}</label>
+            <input type="text" class="form-control" [name]="field.key" [id]="field.key" [placeholder]="field.value.placeholder" [required]="field.value.required" [pattern]="field.value.regex" [title]="field.value.regexErrorMessage" ngModel>
+        </div>
+
+        <!-- checkbox element -->
+        <div *ngIf="field.value.type == 'checkbox'">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" [name]="field.key" [id]="field.key" [required]="field.value.required" ngModel>
+                <label class="form-check-label" [for]="field.key">
+                  {{field.value.label}}
+                </label>
+              </div>
+        </div>
+
+        <!-- single select element -->
+        <div *ngIf="field.value.type == 'singleSelect'">
+            <label class="form-check-label" [for]="field.key">
+                {{field.value.label}}
+            </label>
+            <select class="form-select" [name]="field.key" [id]="field.key" [required]="field.value.required" ngModel>
+                <option *ngFor="let selectOption of field.value.options" [value]="selectOption.value">{{selectOption.label}}</option>
+            </select>
+        </div>
+
+        <!-- multi-select element -->
+        <div *ngIf="field.value.type == 'multiSelect'">
+
+        </div>
+
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+</form>
