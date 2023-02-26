@@ -9,11 +9,11 @@ class SourceFormTemplateSerializer(serializers.ModelSerializer):
 
 
 class SourceSerializer(serializers.ModelSerializer):
-    source_form = serializers.SerializerMethodField()
+    source_form_fields = serializers.SerializerMethodField()
 
     class Meta:
         model = Source
         fields = "__all__"
 
-    def get_source_form(self, obj):
-        return obj.source_form_template.source_form
+    def get_source_form_fields(self, obj):
+        return obj.source_form_template.fields

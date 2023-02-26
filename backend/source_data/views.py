@@ -7,7 +7,7 @@ from rest_framework.decorators import api_view
 @api_view(['GET'])
 def get_source_types(request):
     # return only those source types for which form template is present
-    form_templates_source_types = SourceFormTemplate.objects.values_list("source_type", flat=True)
+    form_templates_source_types = SourceFormTemplate.objects.values_list("type", flat=True)
 
     response = {
         source_type: getattr(SourceFormTemplate.SourceType, source_type).label
