@@ -50,6 +50,8 @@ export class SourceComponent implements OnInit {
     // console.log(sourceDataFormValues);
     // return
 
+    // TODO - fix checkbox value being stored as empty string, if it's untouched
+
     let sourceData = {};
 
     sourceData["source_form_template"] = this.sourceForm.id;

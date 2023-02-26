@@ -1,5 +1,6 @@
-<div class="container">
-    <div class="my-5 text-bg-secondary p-3 rounded">
+<div class="container py-5">
+
+    <div class="text-bg-secondary p-3 rounded">
         <label class="form-check-label" for="sourceType">
             Source Type
         </label>
@@ -9,7 +10,7 @@
         </select>
     </div>
 
-    <div class="text-bg-light p-3 rounded">
+    <div class="text-bg-light p-3 mt-5 rounded">
         <form *ngIf="sourceForm" #sourceDataForm="ngForm" (ngSubmit)="createSource(sourceDataForm)">
             <div class="mb-3" *ngFor="let field of sourceForm.source_form.fields | keyvalue">
 
