@@ -23,9 +23,9 @@ class SourceFormTemplate(BaseModel):
     description = models.TextField(blank=True)
 
     # it is assumed that, there'll only be one template for a source type
-    source_type = models.CharField(max_length=100, choices=SourceType.choices, unique=True)
+    type = models.CharField(max_length=100, choices=SourceType.choices, unique=True)
 
-    source_form = models.JSONField()
+    fields = models.JSONField()
 
 class Source(BaseModel):
 

@@ -23,7 +23,7 @@ class SourceFormTemplateList(generics.CreateAPIView):
 class SourceFormTemplateDetail(generics.RetrieveUpdateAPIView):
     serializer_class = SourceFormTemplateSerializer
     queryset = SourceFormTemplate.objects.all()
-    lookup_field = "source_type"
+    lookup_field = "type"
 
 class SourceList(generics.CreateAPIView):
     serializer_class = SourceSerializer
