@@ -1,6 +1,6 @@
 export interface Source {
     id: number;
-    source_form: Object
+    source_form_fields: Object
     created_at: string;
     updated_at: string;
     uuid: string;

@@ -5,6 +5,6 @@ export interface SourceForm {
     uuid: string;
     name: string;
     description: string
-    source_type: string,
-    source_form: Object
+    type: string,
+    fields: Object
 }

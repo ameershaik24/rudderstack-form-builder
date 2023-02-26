@@ -12,7 +12,7 @@
 
     <div class="text-bg-light p-3 mt-5 rounded">
         <form *ngIf="sourceForm" #sourceDataForm="ngForm" (ngSubmit)="createSource(sourceDataForm)">
-            <div class="mb-3" *ngFor="let field of sourceForm.source_form.fields | keyvalue">
+            <div class="mb-3" *ngFor="let field of sourceForm.fields | keyvalue">
 
                 <!-- input element -->
                 <div *ngIf="field.value.type == 'input'">
